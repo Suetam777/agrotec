@@ -1,0 +1,77 @@
+ion-header {
+  --background: #fff;
+}
+
+@media (max-width: 768px) {
+  ion-toolbar {
+    padding: 0;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .intro {
+    display: none;
+  }
+
+  ul {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  ion-toolbar {
+    padding: 0 16px;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  ion-menu {
+    display: none;
+  }
+
+  /* Estilos para o menu no desktop */
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ion-menu{
+    display: none;
+  }
+
+  .intro {
+    display: block;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    margin: 0 10px;
+  }
+
+  ul li a {
+    text-decoration: none;
+  }
+}
+
+.foto-perfil {
+  border-radius: 16px;
+  outline: 5px solid white;
+}
+
+.titulo-nome {
+  font-size: 3rem;
+}
+
+.titulo-funcao {
+  font-size: 2rem;
+}

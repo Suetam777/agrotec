@@ -1,190 +1,63 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Exibe o botão do menu lateral apenas em dispositivos móveis -->
+      <ion-menu-button *ngIf="isMobile"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Agropecuária Leme
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/login">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<!-- Menu lateral visível apenas em dispositivos móveis -->
+<ion-menu side="start" contentId="main-content" *ngIf="isMobile">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="closeMenu()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/home">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        Home
+      </ion-item>
+      <ion-item (click)="toggleSubmenu('produtosSubmenu')">
+        <ion-icon slot="start" name="cube-outline"></ion-icon>
+        Produtos
+        <ion-icon slot="end" [name]="submenuVisible['produtosSubmenu'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+      </ion-item>
+      <ion-list *ngIf="submenuVisible['produtosSubmenu']">
+        <ion-item routerLink="/caninos">
+          <ion-icon slot="start" name="paw-outline"></ion-icon>
+          Caninos
+        </ion-item>
+        <ion-item routerLink="/felinos">
+          <ion-icon slot="start" name="paw-outline"></ion-icon>
+          Felinos
+        </ion-item>
+      </ion-list>
+      <ion-item routerLink="/sobrenos">
+        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+        Sobre Nós
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
 
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="12"  size-lg="8" size-xl="6">
-
-      <!-- CABEÇALHO DO CURRICULO -->
-      <ion-row>
-        <ion-col size="12" size-lg="4">
-          <img class="perfil-pic" src="{{ this.pessoa.foto }}">
-        </ion-col>
-        <ion-col size="12" size-lg="8">
-          <ion-label>
-            <h2 class="titulo-nome">{{ this.pessoa.nome }}</h2>
-            <h4 class="titulo-objetivo">{{ this.pessoa.objetivo }}</h4>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-
-      <!-- LINHA DIVISÓRIA -->
-      <ion-row>
-        <ion-col size="4">
-          <ion-item-divider></ion-item-divider>
-        </ion-col>
-        <ion-col size="4" class="ion-text-center">
-          <h3>CONTATO</h3>
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-divider></ion-item-divider>
-        </ion-col>
-      </ion-row>
-
-      <!-- INFORMAÇÕES DE CONTATO -->
-       <ion-row>
-        <ion-col size="12">
-          <ion-card>
-            <ion-item>
-              <ion-icon slot="start" name="mail-outline"></ion-icon>
-              <ion-label>{{ this.pessoa.contato.email }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon slot="start" name="call-outline"></ion-icon>
-              <ion-label>{{ this.pessoa.contato.telefone }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon slot="start" name="logo-github"></ion-icon>
-              <ion-label>{{ this.pessoa.contato.github }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon slot="start" name="logo-linkedin"></ion-icon>
-              <ion-label>{{ this.pessoa.contato.linkedin }}</ion-label>
-            </ion-item>
-          </ion-card>
-        </ion-col>
-       </ion-row>
-
-       <!-- LINHA DIVISÓRIA -->
-      <ion-row>
-        <ion-col size="4">
-          <ion-item-divider></ion-item-divider>
-        </ion-col>
-        <ion-col size="4" class="ion-text-center">
-          <h3>SOFT SKILLS</h3>
-        </ion-col>
-        <ion-col size="4">
-          <ion-item-divider></ion-item-divider>
-        </ion-col>
-      </ion-row>
-
-       <!-- SOFT SKILLS -->
-        <ion-row>
-          <ion-col size="12">
-            <ion-card>
-              <ng-container *ngFor="let softskill of this.pessoa.softskills"></ng-container>
-              <ion-item>
-                <ion-label>{{ softskill }}</ion-label>
-              </ion-item>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-
-    </ion-col>
-  </ion-row>
-
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="12" size-lg="8" size-xl="6">
-
-      <!-- CABEÇALHO -->
-       <ion-row>
-        <ion-col size="12" size-lg="4">
-          <img src="https://i.pinimg.com/736x/29/66/d1/2966d11abca07e3cb869b1f9700ad71d.jpg" class="foto-perfil">
-        </ion-col>
-        <ion-col size="12" size-lg="8">
-          <h2 class="titulo-nome">Barrigudinha Seleide</h2>
-          <h3 class="titulo-funcao">Programador HTML & CSS</h3>
-        </ion-col>
-       </ion-row>
-
-       <!-- INFORMAÇÃO DE CONTATO -->
-        <ion-row>
-          <ion-col size="4">
-            <ion-item-divider></ion-item-divider>
-          </ion-col>
-          <ion-col size="4" class="ion-text-center">
-            <h3>CONTATO</h3>
-          </ion-col>
-          <ion-col size="4">
-            <ion-item-divider></ion-item-divider>
-          </ion-col>
-        </ion-row>
-
-        <!-- DADOS DE CONTATO -->
-         <ion-row>
-          <ion-col size="12">
-            <ion-card>
-              <ion-item>
-                <ion-icon slot="start" name="mail-outline"></ion-icon>
-                <ion-label>E-mail: seleide@gmailcom</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-icon slot="start" name="call-outline"></ion-icon>
-                <ion-label>Telefone: (11)99666-6666</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-icon slot="start" name="logo-github"></ion-icon>
-                <ion-label>Github: github.com/seleide</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-icon slot="start" name="logo-linkedin"></ion-icon>
-                <ion-label>LinkedIn: linkedin.com/seleide</ion-label>
-              </ion-item>
-            </ion-card>
-          </ion-col>
-         </ion-row>
-
-         <!-- SOFT SKILLS -->
-        <ion-row>
-          <ion-col size="4">
-            <ion-item-divider></ion-item-divider>
-          </ion-col>
-          <ion-col size="4" class="ion-text-center">
-            <h3>SOFT SKILLS</h3>
-          </ion-col>
-          <ion-col size="4">
-            <ion-item-divider></ion-item-divider>
-          </ion-col>
-        </ion-row>
-
-        <!-- DADOS DE CONTATO -->
-         <ion-row>
-          <ion-col size="12">
-            <ion-card>
-              <ion-item>
-                <ion-label>Trabalho em Grupo</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Comunicação</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Resiliência</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Proatividade</ion-label>
-              </ion-item>
-            </ion-card>
-          </ion-col>
-         </ion-row>
-
-
-
-
-
-
-
-
-
-
-
-    </ion-col>
-  </ion-row>
-
+<ion-content id="main-content" fullscreen>
+  <!-- Conteúdo do Ion Content -->
 </ion-content>
->>>>>>> 25935e4bd3d682ac5214728388211f13d84f51d5
+=======
+<ion-content [fullscreen]="true">
